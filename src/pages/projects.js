@@ -13,7 +13,11 @@ export default ({ data: { allProjectsJson: { edges: projects }}}) => {
       <ul>
         {
           projects.map(({ node: p }) => (
-            <li key={p.id}>{p.name}</li>
+            <li key={p.id}>
+              <Link to={p.fields.slug}>
+                {p.name}
+              </Link>
+            </li>
           ))
         }
       </ul>
@@ -30,6 +34,9 @@ export const query = graphql`
         node {
           id
           name
+          fields {
+            slug
+          }
         }
       }
     }
